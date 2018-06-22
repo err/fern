@@ -1,0 +1,22 @@
+;; adapted from Sean Corfield's dot-clojure:
+;; `https://github.com/seancorfield/dot-clojure/blob/master/deps.edn`
+;;
+{:paths ["src" "resources"]
+ :deps
+ {org.clojure/tools.reader {:mvn/version "1.0.0-beta4"}
+  fipp                     {:mvn/version "0.6.8"}
+  mvxcvi/puget             {:mvn/version "1.0.1"}
+  jline/jline              {:mvn/version "2.14.2"}}
+ :aliases
+ {:1.8    {:override-deps {org.clojure/clojure "1.9.0"}}
+  :1.9    {:override-deps {org.clojure/clojure "1.9.0"}}
+  ;; - see https://github.com/cognitect-labs/test-runner
+  ;; - see script/test
+  ;; - run your tests: clj -A:test:runner:1.9
+  :test   {:extra-paths ["test"]}
+  :runner {:extra-deps {com.cognitect/test-runner
+                        {:git/url "https://github.com/cognitect-labs/test-runner"
+                         :sha     "76568540e7f40268ad2b646110f237a60295fa3c"}}
+           :main-opts  ["-m" "cognitect.test-runner"
+                        "-d" "test"
+                        "-d" "src/test/clojure"]}}}
